@@ -771,10 +771,14 @@ class Agent {
     }
 
     coneVision(input) {
-        const rays = params.AGENT_VISION_RAYS - 1;
-        const angle = params.AGENT_VISION_ANGLE * Math.PI / 180;
+        var rays = params.AGENT_VISION_RAYS -1; //modift so that predator score increases this
+        var angle = params.AGENT_VISION_ANGLE * Math.PI / 180;// modify so that predaator score decrease this
+        if (this.foodHierarchyIndex === 0) {
+            //rays = rays +5;
+            //angle = params.AGENT_VISION_ANGLE * Math.PI / 120;
+        } // modify so that predaator score decrease this
         const angleBetw = angle / rays;
-
+        
         let currAngle = this.heading - angle / 2;
 
         let eyes = this.getEyePos();
