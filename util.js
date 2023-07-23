@@ -73,7 +73,8 @@ const params = {
     BUSH_SIGHT_MODE: "solid",
     INACTIVE_PREY_TARGETABLE: true,
     PUSH_FHI_TO_ANN: true,
-
+    MODVISION: false,
+    PREDGOOD: false,
 };
 
 const agentTrackerAttributesToCollect = [
