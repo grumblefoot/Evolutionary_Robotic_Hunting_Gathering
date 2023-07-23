@@ -16,7 +16,24 @@ class Agent {
             maxGen: 20,
             dist: 600,
         },
+        /*{
+            maxGen: 60,
+            dist: 200
+        },
+        {
+            maxGen: 100,
+            dist: 100
+        },
+        {
+            maxGen: 200,
+            dist: 50
+        },*/
+        /*{
+            maxGen: Infinity,
+            dist: params.AGENT_DIAMETER/2
+        },*/
     ]
+
     /**
      * 
      * @param {*} game the game engine
@@ -104,7 +121,20 @@ class Agent {
             /** Rewards the agent based on how close they were to getting calories 
              * It rewards a fraction of what they would've gotten from eating the food depending on how close they were to consumption
             */
-
+            /*if (this.closestFood.cals > 0) {
+                //Part 1: how close were they to the food?
+                let fitnessFromCalDist = 2 / (1 + Math.E ** (this.closestFood.dist / 50));
+                //Part 2: were they touching the food, and if so were they also biting?
+                let fitnessFromPotCal = 0.5 * fitnessFromCalDist + 0 * this.touchingFood + 0.2 * (this.touchingFood && this.biting);
+                //Part 3: how close were they to finishing off the foods tick counter?
+                fitnessFromPotCal += 0.3 * this.maxEatingCompletion;
+                //Part 4: punish them based on how fast they were going, or if they were dead
+                fitnessFromPotCal /= this.energy > Agent.DEATH_ENERGY_THRESH ? this.speed + 1 : 10;
+    
+                totalRawFitness += this.closestFood.cals * params.FITNESS_POTENTIAL_CALORIES * fitnessFromPotCal;
+                //console.log("fitness from potential calories: " + (0.5 * fitnessFromCalDist + 0.5 * this.maxEatingCompletion * fitnessFromCalDist));
+                //console.log("Closest I got to eating was: " + this.maxEatingCompletion);
+            }*/
             let fitnessFromPotCal = 0;
             if (this.closestFood.cals > 0) {
                 let fitnessFromCalDist = 2 / (1 + Math.E ** (this.closestFood.dist / 50));
@@ -352,6 +382,12 @@ class Agent {
             spawnPointY += halfMapSize;
         }
 
+        //let spawnRadius = 100;
+
+        // //Respawn at the opposite quadrant
+        // this.x = randomInt(spawnRadius * 2) - spawnRadius + spawnPointX;
+        // this.y = randomInt(spawnRadius * 2) - spawnRadius + spawnPointY;
+
         //Respawn predator
         if (params.HUNTING_MODE === "hierarchy_spectrum") {
             this.respawn(predator);
@@ -452,6 +488,13 @@ class Agent {
             entities = this.game.population.getEntitiesInWorld(0, !params.AGENT_NEIGHBORS);
         }
 
+        //console.log(entities);
+        //params.SIM_PAUSE = true;
+        // else {
+        //     if (this.worldId && this.game.population.worlds.get(this.worldId)) {
+        //         entities = this.game.population.getEntitiesInWorld(this.worldId, !params.AGENT_NEIGHBORS);
+        //     }
+        // }
         entities.forEach(entity => {
             let added = false;
             /** add all entities to our spotted neighbors that aren't ourselves, not dead, and are within our vision radius */
@@ -730,8 +773,13 @@ class Agent {
     coneVision(input) {
         var rays = params.AGENT_VISION_RAYS -1; //modift so that predator score increases this
         var angle = params.AGENT_VISION_ANGLE * Math.PI / 180;// modify so that predaator score decrease this
-        if (this.foodHierarchyIndex === 0) {
-        } // modify so that predaator score decrease this
+        /*if (this.foodHierarchyIndex != 0) {// if heierarchy = 0, this a prey
+            rays = rays +5;
+            angle = params.AGENT_VISION_ANGLE * Math.PI / 140;
+        } else {
+            angle = params.AGENT_VISION_ANGLE * Math.PI / 220
+        }
+        */ 
         const angleBetw = angle / rays;
         
         let currAngle = this.heading - angle / 2;
