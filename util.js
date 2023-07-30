@@ -1,8 +1,8 @@
 /** Global Parameters Object */
 const params = {
     CANVAS_SIZE: 1000,
-    DB: "testDB",
-    DB_COLLECTION: "NEATtests",
+    DB: "tcss435",
+    DB_COLLECTION: "blue3",
     GEN_TO_SAVE: 40,
     GENOME_DB: "test",
     GENOME_DB_COLLECTION: "NEATGenomeTests1",
