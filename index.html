@@ -47,6 +47,7 @@
 <body>
 
 <script>
+    /*
     // Connect to the server
     //var socket = io.connect('http://73.225.31.4:8888');
 
@@ -83,6 +84,9 @@
     //    if (array.length > 0) parseData(array);
     //    else console.log("Empty data.");
     //});
+    socket.on('disconnect', function() {
+        console.log('Disconnected from the server');
+    });
 
     //socket.emit("find",
     //    {
@@ -91,8 +95,12 @@
             //query: {"params.food": "none", "params.plantStrategy":
     //            "none" }});
 
+        }
+    };
 
-
+    // Use socket.emit to send the message to the server
+    socket.emit('insert', data);
+    */
 
 </script>
     <!-- <canvas id="gameWorld" width="800" height="800" style="background: white; border: 1px solid black" tabindex="0"></canvas> -->
