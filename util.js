@@ -41,6 +41,12 @@ const params = {
     AGENT_VISION_ANGLE: 180,
     AGENT_VISION_IS_CONE: true,
     AGENT_VISION_DRAW_CONE: false,
+    PREY_VISION_RAYS: 13,
+    PREY_VISION_ANGLE: 180,
+    PREY_VISION_IS_CONE: true,
+    PRED_VISION_RAYS: 13,
+    PRED_VISION_ANGLE: 180,
+    PRED_VISION_IS_CONE: true,
     MAX_TICKS_TO_CONSUME: 50,
     COOLDOWN_TO_REGEN: 100,
     EVOLVE_K_AND_M: true,
@@ -75,6 +81,7 @@ const params = {
     PUSH_FHI_TO_ANN: true,
     MODVISION: false,
     PREDGOOD: false,
+    DIFFVISION: false
 };
 
 const agentTrackerAttributesToCollect = [
