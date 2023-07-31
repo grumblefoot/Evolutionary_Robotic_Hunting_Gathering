@@ -47,8 +47,8 @@
 <body>
 
 <script>
-    // // Connect to the server
-    // socket = io.connect('http://73.225.31.4:8888');
+    // Connect to the server
+    var socket = io.connect('http://73.225.31.4:8888');
 
     // socket.on('connect', function() {
     //     console.log('Connected to the server');
@@ -77,6 +77,21 @@
 
     // // Use socket.emit to send the message to the server
     // socket.emit('insert', data);
+
+    // Find and retrieve the data
+    socket.on("find", function (array) {
+        if (array.length > 0) parseData(array);
+        else console.log("Empty data.");
+    });
+
+    socket.emit("find",
+        {
+            db: "tcss435",
+            collection: "blue3",
+            //query: {"params.food": "none", "params.plantStrategy":
+                "none" }});
+
+
 
 
 </script>
