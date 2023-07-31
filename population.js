@@ -183,7 +183,6 @@ class PopulationManager {
         //New added params
         params.MODVISION = document.getElementById('MODVISION').checked;
         params.PREDGOOD = document.getElementById('PREDGOOD').checked;
-        params.DIFFVISION = document.getElementById('DIFFVISION').checked;
 
         PopulationManager.SPECIES_ID = 0;
         PopulationManager.GEN_NUM = 0;
@@ -288,7 +287,6 @@ class PopulationManager {
         // new params added
         params.MODVISION = document.getElementById('MODVISION').checked;
         params.PREDGOOD = document.getElementById('PREDGOOD').checked;
-        params.DIFFVISION = document.getElementById('DIFFVISION').checked;
 
 
         if (params.GRADUAL_CONSUMPTION){
@@ -374,24 +372,6 @@ class PopulationManager {
         }
         if (document.activeElement.id !== "agent_vision_angle") {
             params.AGENT_VISION_ANGLE = parseFloat(document.getElementById("agent_vision_angle").value);
-        }
-        if (document.activeElement.id !== "prey_vision_radius") {
-            params.PREY_VISION_RADIUS = parseFloat(document.getElementById("prey_vision_radius").value);
-        }
-        if (document.activeElement.id !== "prey_vision_rays") {
-            params.PREY_VISION_RAYS = parseFloat(document.getElementById("prey_vision_rays").value);
-        }
-        if (document.activeElement.id !== "prey_vision_angle") {
-            params.PREY_VISION_ANGLE = parseFloat(document.getElementById("prey_vision_angle").value);
-        }
-        if (document.activeElement.id !== "pred_vision_radius") {
-            params.PRED_VISION_RADIUS = parseFloat(document.getElementById("pred_vision_radius").value);
-        }
-        if (document.activeElement.id !== "pred_vision_rays") {
-            params.PRED_VISION_RAYS = parseFloat(document.getElementById("pred_vision_rays").value);
-        }
-        if (document.activeElement.id !== "pred_vision_angle") {
-            params.PRED_VISION_ANGLE = parseFloat(document.getElementById("pred_vision_angle").value);
         }
         if (document.activeElement.id !== "compat_threshold") {
             params.COMPAT_THRESH = parseFloat(document.getElementById("compat_threshold").value);

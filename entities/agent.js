@@ -775,34 +775,19 @@ class Agent {
         var angle = params.AGENT_VISION_ANGLE * Math.PI / 180;// modify so that predator score decrease this
         var dimorphVision = params.MODVISION;
         var swapDimorph = params.PREDGOOD;
-        var diffVision = params.DIFFVISION;
-        var predRays = params.PRED_VISION_RAYS -1;
-        var predAngle = params.PRED_VISION_ANGLE * Math.PI / 180;
-        var preyRays = params.PREY_VISION_RAYS -1;
-        var preyAngle = params.PREY_VISION_ANGLE * Math.PI / 180;
         // if heierarchy = 0, this agent is prey, else predator (predator = 1)
-
-        if (diffVision === true) {
-            if (this.foodHierarchyIndex !== 0) {
-                rays = predRays;
-                angle = predAngle;
-            } else if(this.foodHierarchyIndex === 0) {
-                rays = preyRays;
-                angle = preyAngle;
-            }
-        }
         
-        // if(dimorphVision === true){
-        //      if (this.foodHierarchyIndex !== 0 && swapDimorph === true) {// Predator get good vision
-        //         rays = rays +5;
-        //          angle = params.AGENT_VISION_ANGLE * Math.PI / 140;
-        //      } else if(this.foodHierarchyIndex === 0 && swapDimorph === false) { //Prey gets good vision
-        //          rays = rays +5;
-        //          angle = params.AGENT_VISION_ANGLE * Math.PI / 140;
-        //      } else {
-        //          angle = params.AGENT_VISION_ANGLE * Math.PI / 220
-        //      }
-        //  }
+        if(dimorphVision === true){
+             if (this.foodHierarchyIndex !== 0 && swapDimorph === true) {// Predator get good vision
+                rays = rays +5;
+                 angle = params.AGENT_VISION_ANGLE * Math.PI / 140;
+             } else if(this.foodHierarchyIndex === 0 && swapDimorph === false) { //Prey gets good vision
+                 rays = rays +5;
+                 angle = params.AGENT_VISION_ANGLE * Math.PI / 140;
+             } else {
+                 angle = params.AGENT_VISION_ANGLE * Math.PI / 220
+             }
+         }
        
         
         const angleBetw = angle / rays;
