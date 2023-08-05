@@ -30,7 +30,7 @@ csv_files = [file for file in os.listdir(data_folder_path) if file.endswith('.cs
 
 data_frames = {}
 for i, file_name in enumerate(csv_files):
-    data_frames[f"{file_name}_{i+1}"] = pd.read_csv(os.path.join(folder_path, file_name))
+    data_frames[f"{file_name}_{i+1}"] = pd.read_csv(os.path.join(data_folder_path, file_name))
 
 
 # In[12]:
@@ -64,7 +64,7 @@ for run_name, df in data_frames.items():
 
     # Save the figure with a unique filename in the graphs folder
     save_path = os.path.join(graphs_folder_path, f'{run_name}_plot.png')
-    plt.savefig(f'{run_name}_plot.png')
+    plt.savefig(save_path)
 
     plt.show()
 
@@ -84,7 +84,7 @@ csv_files = [file for file in os.listdir(data_folder_path) if file.endswith('.cs
 
 data_frames = {}
 for i, file_name in enumerate(csv_files):
-    data_frames[f"{file_name}_{i+1}"] = pd.read_csv(os.path.join(folder_path, file_name))
+    data_frames[f"{file_name}_{i+1}"] = pd.read_csv(os.path.join(data_folder_path, file_name))
 
 
 # Loop through each data frame (run) and create a separate plot for each
@@ -115,7 +115,7 @@ for run_name, df in data_frames.items():
 
     # Save the figure with a unique filename in the graphs folder
     save_path = os.path.join(graphs_folder_path, f'{run_name}_plot.png')
-    plt.savefig(f'{run_name}_plot.png')
+    plt.savefig(save_path)
 
     plt.show()
 
