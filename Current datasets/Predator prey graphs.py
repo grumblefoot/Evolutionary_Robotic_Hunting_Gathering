@@ -40,7 +40,7 @@ for i, file_name in enumerate(csv_files):
 for run_name, df in data_frames.items():
     # Extract the relevant part of the file name to use as the title
     file_name_parts = run_name.split("_")
-    title_part = "_".join(file_name_parts[1:-1])  # Exclude the first and last parts
+    title_part = "_".join(file_name_parts[0:-1])  # Exclude the first and last parts
 
     # Create a new figure for each run
     plt.figure(figsize=(10, 6))
@@ -77,7 +77,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-data_folder_path = os.path.join(os.getcwd(), "Trials300")
+data_folder_path = os.path.join(os.getcwd(), "Trials100")
 graphs_folder_path = os.path.join(os.getcwd(), "Graphs")
 
 csv_files = [file for file in os.listdir(data_folder_path) if file.endswith('.csv')]
