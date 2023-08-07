@@ -1,27 +1,26 @@
 #Rowan W Osmon
 # ver1.1
-
-#Format to run with command line: python gen_graph.py 'src folder' 'destination folder'
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import sys, os
 
-#Default folders to generate charts
-src = os.getcwd() + "\Current datasets\Trials100\WidePreyNarrowPred"
-dest = os.getcwd() +  "\Current datasets\Graphs\WidePreyNarrowPred"
+# Default folders to generate charts
+#src = os.getcwd() + "/Current datasets/Trials100/WidePredNarrowPrey"
+#dest = os.getcwd() +  "/Current datasets/Graphs/WidePredNarrowPrey"
+
+src = os.getcwd() + "/Current datasets/Trials100/Stock"
+dest = os.getcwd() +  "/Current datasets/Graphs/Stock"
 
 STANDARD_TRIALS_NUM = 100
 
-#Support command line argument
+# Support command line argument
 if (len(sys.argv) > 1):
     if (sys.argv[1] is not None):
         src = sys.argv[1]
     if (sys.argv[2] is not None):
         dest = sys.argv[2]
-#os.chdir(src)
-#print(os.listdir())
+
 bounds = {
     'avgFitness': [0, 0],
     'totalPreyHuntedCount': [0, 0],
@@ -151,54 +150,52 @@ def getYLabel(fparts):
         print('A title ID does not exist yet! Add ' + titleId + ' to the getTitle(titleId) method.', file=sys.stderr)
     return 'error :('
 
-def createPlot(csv_path, plotDest, title, x_label, y_label, bounds, profileName = ''):
+def createPlot(csv_path, plotDest, title, x_label, y_label, bounds, profileName=''):
     df = pd.read_csv(csv_path)
-    df.drop('Average', axis = 'columns', inplace = True)
-    df.dropna(axis=1, inplace = True)
-
+    df.drop('Average', axis='columns', inplace=True)
+    df.dropna(axis=1, inplace=True)
     cnum = 0
     for c in df.columns:
         if (cnum >= STANDARD_TRIALS_NUM):
-            df.drop(c, axis = 'columns', inplace = True)
+            df.drop(c, axis='columns', inplace=True)
         else:
             cnum += 1
 
-    #scatter = df.drop('Average', axis = 'columns')
-    c_len = len(df.columns)
+    #!!!!!
+    # Plotting individual trials as scatter points without labels
     for c in df.columns:
-        if (c_len - 1 > 10):
-            plt.scatter(df.index.array, df[c],  4, alpha = 0.1)
-        else: 
-            plt.scatter(df.index.array, df[c],  4, label = c, alpha = 0.1)
+        plt.scatter(df.index.array, df[c], 4, alpha=0.5)
+
+    # Plotting the average as a line plot
     df['Average'] = df.mean(numeric_only=True, axis=1)
-    plt.plot(df['Average'], linewidth = 1.8, label = 'Average', color = 'black')
-    
+    average_line, = plt.plot(df['Average'], linewidth=1.8, label='Average', color='red')
+
+    # Calculating +SD and -SD
     SDAbove = []
     SDBelow = []
-    df['StandardDeviation'] = df.std(axis = 1, ddof = 0)
-    for mean, sd in zip(df['Average'] , df['StandardDeviation']):
+    df['StandardDeviation'] = df.std(axis=1, ddof=0)
+    for mean, sd in zip(df['Average'], df['StandardDeviation']):
         SDAbove.append(mean + sd)
         SDBelow.append(mean - sd)
 
-    #plt.plot(df['StandardDeviation'], linewidth = 1, ls = '--', label = 'Standard Deviation', color = 'red')
-    plt.plot(SDAbove, linewidth = 1.2, ls = '-', label = '+SD', color = 'red', alpha = 0.8)
-    plt.plot(SDBelow, linewidth = 1.2, ls = '-', label = '-SD', color = 'blue', alpha = 0.8)
+    # Plotting +SD and -SD
+    sd_above_line, = plt.plot(SDAbove, linewidth=1.2, ls='-', label='+SD', color='blue', alpha=0.8)
+    sd_below_line, = plt.plot(SDBelow, linewidth=1.2, ls='-', label='-SD', color='black', alpha=0.8)
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.title(title)
-    plt.legend()
-    plt.ylim(top = bounds[1], bottom = bounds[0])
-    #plt.show()
+    plt.legend(handles=[average_line, sd_above_line, sd_below_line]) 
+    plt.ylim(top=bounds[1], bottom=bounds[0])
 
     fileName = title.replace(' ', '_')
     plt.savefig(plotDest + '/' + fileName + profileName + '.png')
     plt.clf()
 
-    print(profileName.replace('_',' ') + " : " + title + " with " + str(len(df.columns) - 2) + " columns")# to show progress
-    
+    print(profileName.replace('_', ' ') + " : " + title + " with " + str(len(df.columns) - 2) + " columns")  # to show progress
+
 if len(os.listdir(dest)) != 0:
-    print('Please clear your destination directory and try again...', file = sys.stderr)
+    print('Please clear your destination directory and try again...', file=sys.stderr)
     exit(1)
 determineMax('')
 recurseFolders('')
