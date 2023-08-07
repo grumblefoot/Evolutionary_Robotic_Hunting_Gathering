@@ -9,8 +9,8 @@ import sys, os
 #src = os.getcwd() + "/Current datasets/Trials100/WidePredNarrowPrey"
 #dest = os.getcwd() +  "/Current datasets/Graphs/WidePredNarrowPrey"
 
-src = os.getcwd() + "/Current datasets/Trials100/Stock"
-dest = os.getcwd() +  "/Current datasets/Graphs/Stock"
+src = os.getcwd() + "/Current datasets/Trials100/StockDB"
+dest = os.getcwd() +  "/Current datasets/Graphs/StockDB"
 
 STANDARD_TRIALS_NUM = 100
 
