@@ -9,8 +9,8 @@ import pandas as pd
 import sys, os
 
 #Default folders to generate charts
-src = os.getcwd() + "\Current datasets\Trials100\WidePreyNarrowPred"
-dest = os.getcwd() +  "\Current datasets\Graphs\WidePreyNarrowPred"
+src = os.getcwd() + "\Current datasets\Trials100\StockDB"
+dest = os.getcwd() +  "\Current datasets\Graphs\StockDB"
 
 STANDARD_TRIALS_NUM = 100
 
