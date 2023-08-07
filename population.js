@@ -1355,7 +1355,6 @@ class PopulationManager {
 
 
             let data = {};
-            data.params = params;
             let consumptionData = this.foodTracker.getConsumptionData();
             consumptionData = consumptionData.slice(0, consumptionData.length - 1);
             data.consumption = consumptionData;
